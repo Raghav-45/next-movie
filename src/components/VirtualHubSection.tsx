@@ -68,7 +68,7 @@ const VirtualHubSection: FC<VirtualHubSectionProps> = ({ children }) => {
       <Carousel
         opts={{
           align: 'start',
-          loop: true,
+          // loop: true,
           // containScroll: true,
           skipSnaps: true,
           slidesToScroll: 'auto',
