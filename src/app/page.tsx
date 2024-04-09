@@ -94,25 +94,16 @@ export default function Home() {
           opts={{
             align: 'start',
             loop: true,
+            // containScroll: true,
+            skipSnaps: true,
+            slidesToScroll: 'auto',
           }}
-          className="w-full max-w-sm"
+          className="w-full"
         >
           <CarouselContent>
             {Array.from({ length: 15 }).map((_, index) => (
-              // <CarouselItem key={index} className="w-full basis-1/6">
-              //   <MoviePoster />
-              // </CarouselItem>
-
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex justify-center items-center p-6 aspect-square">
-                      <span className="font-semibold text-3xl">
-                        {index + 1}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </div>
+              <CarouselItem key={index} className="w-full basis-1/6">
+                <MoviePoster />
               </CarouselItem>
             ))}
           </CarouselContent>
