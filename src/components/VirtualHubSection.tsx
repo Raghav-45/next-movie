@@ -8,7 +8,7 @@ interface VirtualHubSectionProps {
 
 const VirtualHubSection: FC<VirtualHubSectionProps> = ({ children }) => {
   return (
-    <section className="gap-6 grid px-4 md:px-6 py-6 w-full container">
+    <section className="grid px-4 md:px-6 py-6 w-full container">
       <div className="flex justify-between items-center mb-2 px-8 min-h-5">
         <div className="flex flex-col flex-nowrap flex-initial justify-stretch items-stretch">
           <h2 className="font-bold text-2xl tracking-tight">Hollywood Gems</h2>
