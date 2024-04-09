@@ -84,7 +84,7 @@ export default function Home() {
           {Array.from({ length: 15 }).map((_, index) => (
             <CarouselItem
               key={index}
-              className="pl-3 w-full h-full basis-[12.5%]"
+              className="pl-3 w-full h-full basis-[15%]"
             >
               <div className="bg-blue-400 rounded-md w-full overflow-hidden aspect-[2/3]">
                 <img
