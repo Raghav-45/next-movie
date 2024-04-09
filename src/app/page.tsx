@@ -107,8 +107,8 @@ export default function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className='hidden' />
+          <CarouselNext className='hidden' />
         </Carousel>
       </VirtualHubSection>
 
