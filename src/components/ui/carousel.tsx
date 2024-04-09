@@ -216,12 +216,35 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon className="h-4 w-4" />
+      <ArrowLeftIcon className="w-4 h-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
 })
 CarouselPrevious.displayName = "CarouselPrevious"
+
+const CarouselPreviousCustom = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = "default", size = "icon", children, ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={className}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      {...props}
+    >
+      {children}
+      <span className="sr-only">Previous slide</span>
+    </Button>
+  )
+})
+CarouselPreviousCustom.displayName = "CarouselPreviousCustom"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
@@ -245,12 +268,35 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon className="h-4 w-4" />
+      <ArrowRightIcon className="w-4 h-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   )
 })
 CarouselNext.displayName = "CarouselNext"
+
+const CarouselNextCustom = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = "default", size = "icon", children, ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel()
+
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={className}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
+      {children}
+      <span className="sr-only">Next slide</span>
+    </Button>
+  )
+})
+CarouselNextCustom.displayName = "CarouselNextCustom"
 
 export {
   type CarouselApi,
@@ -258,5 +304,7 @@ export {
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
+  CarouselPreviousCustom,
   CarouselNext,
+  CarouselNextCustom,
 }
