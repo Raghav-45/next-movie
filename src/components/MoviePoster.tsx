@@ -7,7 +7,7 @@ interface MoviePosterProps {}
 const MoviePoster: FC<MoviePosterProps> = ({}) => {
   return (
     <Link
-      className="relative border-gray-200 border-gray-200 shadow-sm border rounded-lg transform-gpu transition-transform overflow-hidden aspect-poster group hover:scale-105 focus-within:outline-none focus-within:ring-1 focus-within:ring-gray-950"
+      className="relative border-gray-200 shadow-sm border rounded-lg transform-gpu transition-transform overflow-hidden aspect-poster group hover:scale-105 focus-within:outline-none focus-within:ring-1 focus-within:ring-gray-950"
       href="#"
     >
       <img

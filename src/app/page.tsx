@@ -29,7 +29,7 @@ import { Card, CardContent } from '@/components/ui/card'
 export default function Home() {
   return (
     <>
-      <div className="bg-gray-50/90 border-t">
+      {/* <div className="bg-gray-50/90 border-t">
         <div className="gap-6 lg:gap-10 grid md:grid-cols-2 px-4 md:px-6 py-6 container">
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
@@ -77,39 +77,24 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <VirtualHubSection>
-        <div className="gap-3 grid md:grid-cols-2 xl:grid-cols-7">
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-        </div>
-      </VirtualHubSection>
-
-      <VirtualHubSection>
-        <Carousel
-          opts={{
-            align: 'start',
-            loop: true,
-            // containScroll: true,
-            skipSnaps: true,
-            slidesToScroll: 'auto',
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <CarouselItem key={index} className="w-full basis-1/6">
-                <MoviePoster />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className='hidden' />
-          <CarouselNext className='hidden' />
-        </Carousel>
+        <CarouselContent className="-ml-3">
+          {Array.from({ length: 15 }).map((_, index) => (
+            <CarouselItem
+              key={index}
+              className="pl-3 w-full h-full basis-[12.5%]"
+            >
+              <div className="bg-blue-400 rounded-md w-full overflow-hidden aspect-[2/3]">
+                <img
+                  className="w-full h-full"
+                  src="https://image.tmdb.org/t/p/original/g94IcdzPswTYl1ISdgn2EwvaZtt.jpg"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
       </VirtualHubSection>
 
       <section className="gap-6 grid px-4 md:px-6 py-6 w-full container">
