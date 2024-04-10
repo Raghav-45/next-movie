@@ -7,10 +7,11 @@ import {
 } from './ui/carousel'
 
 interface VirtualHubSectionProps {
+  title: string
   children: React.ReactNode
 }
 
-const VirtualHubSection: FC<VirtualHubSectionProps> = ({ children }) => {
+const VirtualHubSection: FC<VirtualHubSectionProps> = ({ title, children }) => {
   return (
     <section className="px-4 md:px-6 py-6 w-full">
       <Carousel
@@ -23,9 +24,7 @@ const VirtualHubSection: FC<VirtualHubSectionProps> = ({ children }) => {
       >
         <div className="flex justify-between items-center mb-2 px-0 min-h-5">
           <div className="flex flex-col flex-nowrap flex-initial justify-stretch items-stretch">
-            <h2 className="font-bold text-2xl tracking-tight">
-              Hollywood Gems
-            </h2>
+            <h2 className="font-bold text-2xl tracking-tight">{title}</h2>
             <span className="inline-block text-ellipsis text-gray-500 text-sm whitespace-nowrap">
               Movies & Shows (on cloud)
             </span>
