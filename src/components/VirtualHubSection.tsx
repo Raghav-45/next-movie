@@ -64,7 +64,7 @@ const VirtualHubSection: FC<VirtualHubSectionProps> = ({ children }) => {
     //   <CarouselNext className='hidden' />
     // </Carousel>
 
-    <section className="grid px-4 md:px-6 py-6 w-full container">
+    <section className="px-4 md:px-6 py-6 w-full">
       <Carousel
         opts={{
           align: 'start',
