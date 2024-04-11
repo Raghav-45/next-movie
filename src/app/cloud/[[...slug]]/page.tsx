@@ -8,8 +8,14 @@ import {
   CarouselNextCustom,
   CarouselPreviousCustom,
 } from '@/components/ui/carousel'
-import { ChevronLeftIcon, ChevronRightIcon, CirclePlayIcon } from 'lucide-react'
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CirclePlayIcon,
+  SkipBackIcon,
+} from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const googleDriveIndexURL = 'https://gdrive.adi4545aditya.workers.dev'
 const driveNumber = '/0:'
@@ -72,6 +78,31 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
           <CarouselContent className="-ml-3">
+            <CarouselItem className="pl-3 basis-[25%]">
+              {/* <TrailerThumbnail
+                    title={elem.name}
+                    thumbnailPath={
+                      (elem?.fileExtension == 'jpg') ? `https://gdrive.adi4545aditya.workers.dev${elem.link}` : '/5weKu49pzJCt06OPpjvT80efnQj.jpg'}
+                    releaseDate={elem.modifiedTime}
+                  /> */}
+
+              <div className="overflow-hidden group">
+                <div className="relative group-hover:border-2 group-hover:border-yellow-500 mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
+                  <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-100 w-full h-full transition-all">
+                    <SkipBackIcon className="w-10 h-10 text-black" />
+                  </div>
+                  <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-0 group-hover:opacity-100 w-full h-full transition-all">
+                    {/* <SkipBackIcon className="w-10 h-10 text-white" /> */}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-0.5">
+                  <Link href={`/cloud`}>
+                    <p className="px-1 font-semibold text-sm truncate">Back</p>
+                  </Link>
+                  <span className="px-1 text-xs truncate">Previous Page</span>
+                </div>
+              </div>
+            </CarouselItem>
             {staticData &&
               staticData?.data?.files.map((elem: any, index: any) => (
                 <CarouselItem key={index} className="pl-3 basis-[25%]">
@@ -104,9 +135,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-0.5">
-                      <p className="px-1 font-semibold text-sm truncate">
-                        {elem.name}
-                      </p>
+                      <Link href={`/cloud/${elem.name}`}>
+                        <p className="px-1 font-semibold text-sm truncate">
+                          {elem.name}
+                        </p>
+                      </Link>
                       <span className="px-1 text-xs truncate">
                         {elem.modifiedTime}
                       </span>
