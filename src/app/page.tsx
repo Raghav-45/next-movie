@@ -1,7 +1,8 @@
 import MoviePoster from '@/components/MoviePoster'
 import VirtualHubSection from '@/components/VirtualHubSection'
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel'
-// import { homeData } from '@/lib/testData'
+import Image from 'next/image'
+import { CirclePlayIcon } from 'lucide-react'
 
 const homeData = {
   page: 1,
@@ -732,12 +733,11 @@ export default function Home() {
         <CarouselContent className="-ml-3">
           {Array.from({ length: 15 }).map((_, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
-              <div className="bg-blue-400 rounded-md w-full overflow-hidden aspect-[2/3]">
-                <img
-                  className="w-full h-full"
-                  src="https://image.tmdb.org/t/p/original/5weKu49pzJCt06OPpjvT80efnQj.jpg"
-                />
-              </div>
+              <MoviePoster
+                title="Spiderman: No Way Home"
+                posterPath="/5weKu49pzJCt06OPpjvT80efnQj.jpg"
+                releaseDate="2024-01-01"
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -747,13 +747,27 @@ export default function Home() {
         <CarouselContent className="-ml-3">
           {homeData.results.map((elem, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
-              <div className="overflow-hidden">
-                <img
-                  className="mb-1 rounded-md w-full h-full overflow-hidden aspect-[2/3]"
-                  src={`https://image.tmdb.org/t/p/original${elem.poster_path}`}
-                />
+              {/* <MoviePoster
+                title={elem.original_title}
+                posterPath={elem.poster_path}
+                releaseDate={elem.release_date}
+              /> */}
+
+              <div className="overflow-hidden group">
+                <div className="relative group-hover:border-2 group-hover:border-yellow-500 mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
+                  <Image
+                    className="w-full h-full"
+                    src={`https://image.tmdb.org/t/p/original${elem.poster_path}`}
+                    alt={elem.poster_path}
+                    height={150}
+                    width={150}
+                  />
+                  <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-0 group-hover:opacity-100 w-full h-full transition-all">
+                    <CirclePlayIcon className="w-12 h-12 text-white" />
+                  </div>
+                </div>
                 <div className="flex flex-col gap-y-0.5">
-                  <p className="px-1 font-semibold text-sm truncate tracking-wide">
+                  <p className="px-1 font-semibold text-sm truncate">
                     {elem.title}
                   </p>
                   <span className="px-1 text-xs truncate">
@@ -768,24 +782,18 @@ export default function Home() {
 
       <VirtualHubSection title={'Spiderman'}>
         <CarouselContent className="-ml-3">
-          {spiderman.results.map((elem, index) => (
-            <CarouselItem key={index} className="pl-3 basis-[15%]">
-              <div className="overflow-hidden">
-                <img
-                  className="mb-1 rounded-md w-full h-full overflow-hidden aspect-[2/3]"
-                  src={`https://image.tmdb.org/t/p/original${elem.poster_path}`}
-                />
-                <div className="flex flex-col gap-y-0.5">
-                  <p className="px-1 font-semibold text-sm truncate tracking-wide">
-                    {elem.title}
-                  </p>
-                  <span className="px-1 text-xs truncate">
-                    {textDate(elem.release_date)}
-                  </span>
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
+          {spiderman.results.map(
+            (elem, index) =>
+              elem.poster_path && (
+                <CarouselItem key={index} className="pl-3 basis-[15%]">
+                  <MoviePoster
+                    title={elem.original_title}
+                    posterPath={elem.poster_path}
+                    releaseDate={elem.release_date}
+                  />
+                </CarouselItem>
+              )
+          )}
         </CarouselContent>
       </VirtualHubSection>
     </>
