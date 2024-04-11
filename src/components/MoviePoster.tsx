@@ -1,3 +1,4 @@
+import { CirclePlayIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC } from 'react'
 
@@ -41,8 +42,8 @@ const MoviePoster: FC<MoviePosterProps> = ({
   releaseDate,
 }) => {
   return (
-    <div className="overflow-hidden">
-      <div className="relative mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
+    <div className="overflow-hidden group">
+      <div className="relative group-hover:border-2 group-hover:border-yellow-500 mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
         <Image
           className="w-full h-full"
           src={`https://image.tmdb.org/t/p/original${posterPath}`}
@@ -50,11 +51,12 @@ const MoviePoster: FC<MoviePosterProps> = ({
           height={150}
           width={150}
         />
+        <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-0 group-hover:opacity-100 w-full h-full transition-all">
+          <CirclePlayIcon className="w-10 h-10 text-white" />
+        </div>
       </div>
       <div className="flex flex-col gap-y-0.5">
-        <p className="px-1 font-semibold text-sm truncate">
-          {title}
-        </p>
+        <p className="px-1 font-semibold text-sm truncate">{title}</p>
         <span className="px-1 text-xs truncate">{textDate(releaseDate)}</span>
       </div>
     </div>
