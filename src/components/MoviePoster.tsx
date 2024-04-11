@@ -1,45 +1,63 @@
-import { PlayIcon } from '@radix-ui/react-icons'
-import Link from 'next/link'
+import Image from 'next/image'
 import { FC } from 'react'
 
-interface MoviePosterProps {}
+interface MoviePosterProps {
+  posterPath: string
+  title: string
+  releaseDate: string
+}
 
-const MoviePoster: FC<MoviePosterProps> = ({}) => {
+const textDate = async (givenDate: string) => {
+  // Split the input date string into year, month, and day parts
+  const formattedDate: unknown[] = givenDate.split('-')
+
+  // Extract year, month, and day from the parts
+  const year = formattedDate[0] as number
+  const month = formattedDate[1] as number
+  // const date = formattedDate[2] as number
+
+  // Array of month names
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  // Return the formatted date string
+  return `${monthNames[month - 1]} ${year}`
+}
+
+const MoviePoster: FC<MoviePosterProps> = ({
+  posterPath,
+  title,
+  releaseDate,
+}) => {
   return (
-    <Link
-      className="relative border-gray-200 shadow-sm border rounded-lg transform-gpu transition-transform overflow-hidden aspect-poster group hover:scale-105 focus-within:outline-none focus-within:ring-1 focus-within:ring-gray-950"
-      href="#"
-    >
-      <img
-        alt="Poster"
-        className="group-hover:opacity-90 pointer-events-none object-cover"
-        height="600"
-        src="https://image.tmdb.org/t/p/original/g94IcdzPswTYl1ISdgn2EwvaZtt.jpg"
-        style={{
-          aspectRatio: '400/600',
-          objectFit: 'cover',
-        }}
-        width="400"
-      />
-      <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 p-4 text-center transition-opacity pointer-events-none bg_gray-900/90">
-        <PlayIcon className="group-hover:scale-110 dark:bg-gray-950 shadow-lg p-2 rounded-full w-10 h-10 translate-x-0.5 translate-y-0.5 bg_white" />
-        <div className="font-medium text-sm dark:text-gray-900/90 text_gray-50/90">
-          View Details
-        </div>
-      </div>
-      <div className="absolute inset-0 flex flex-col justify-center items-center gap-2 p-4 text-center pointer-events-none">
-        <img
-          alt="Poster"
-          className="aspect-poster object-cover"
-          height="300"
-          src="https://image.tmdb.org/t/p/original/g94IcdzPswTYl1ISdgn2EwvaZtt.jpg"
-          width="200"
+    <div className="overflow-hidden">
+      <div className="relative mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
+        <Image
+          className="w-full h-full"
+          src={`https://image.tmdb.org/t/p/original${posterPath}`}
+          alt={posterPath}
+          height={150}
+          width={150}
         />
-        <div className="font-medium text-xs dark:text-gray-200/80 text_gray-900/80">
-          7.2/10 - Spider-Man: No Way Home
-        </div>
       </div>
-    </Link>
+      <div className="flex flex-col gap-y-0.5">
+        <p className="px-1 font-semibold text-sm truncate">
+          {title}
+        </p>
+        <span className="px-1 text-xs truncate">{textDate(releaseDate)}</span>
+      </div>
+    </div>
   )
 }
 
