@@ -1,8 +1,15 @@
 import MoviePoster from '@/components/MoviePoster'
 import VirtualHubSection from '@/components/VirtualHubSection'
-import { CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNextCustom,
+  CarouselPreviousCustom,
+} from '@/components/ui/carousel'
 import Image from 'next/image'
-import { CirclePlayIcon } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon, CirclePlayIcon } from 'lucide-react'
+import TrailerThumbnail from '@/components/TrailerThumbnail'
 
 const homeData = {
   page: 1,
@@ -729,7 +736,7 @@ const textDate = async (givenDate: string) => {
 export default function Home() {
   return (
     <>
-      <VirtualHubSection title={'Test Data'}>
+      {/* <VirtualHubSection title={'Test Data'}>
         <CarouselContent className="-ml-3">
           {Array.from({ length: 15 }).map((_, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
@@ -741,7 +748,7 @@ export default function Home() {
             </CarouselItem>
           ))}
         </CarouselContent>
-      </VirtualHubSection>
+      </VirtualHubSection> */}
 
       <VirtualHubSection title={'Hollywood Gems'}>
         <CarouselContent className="-ml-3">
@@ -779,6 +786,53 @@ export default function Home() {
           ))}
         </CarouselContent>
       </VirtualHubSection>
+
+      <section className="px-4 md:px-6 py-6 w-full">
+        <Carousel
+          opts={{
+            align: 'start',
+            skipSnaps: true,
+            slidesToScroll: 'auto',
+          }}
+          className="px-8 w-full"
+        >
+          <div className="flex justify-between items-center mb-2 px-0 min-h-5">
+            <div className="flex flex-col flex-nowrap flex-initial justify-stretch items-stretch">
+              <h2 className="font-bold text-2xl tracking-tight">
+                Trending Trailers
+              </h2>
+              <span className="inline-block text-ellipsis text-gray-500 text-sm whitespace-nowrap">
+                Discover
+              </span>
+            </div>
+            <div className="flex justify-between items-center ml-auto w-20 h-auto">
+              <CarouselPreviousCustom
+                size="icon"
+                className="relative bg-gray-300 hover:bg-gray-200 dark:bg-black opacity-70 rounded-full text-gray-500 dark:text-white"
+              >
+                <ChevronLeftIcon className="w-4 h-4" />
+              </CarouselPreviousCustom>
+              <CarouselNextCustom
+                size="icon"
+                className="bg-gray-300 hover:bg-gray-200 dark:bg-black opacity-100 rounded-full text-gray-500 dark:text-white"
+              >
+                <ChevronRightIcon className="w-4 h-4" />
+              </CarouselNextCustom>
+            </div>
+          </div>
+          <CarouselContent className="-ml-3">
+            {homeData.results.map((elem, index) => (
+              <CarouselItem key={index} className="pl-3 basis-[25%]">
+                <TrailerThumbnail
+                  title={elem.original_title}
+                  thumbnailPath={elem.backdrop_path}
+                  releaseDate={elem.release_date}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </section>
 
       <VirtualHubSection title={'Spiderman'}>
         <CarouselContent className="-ml-3">
