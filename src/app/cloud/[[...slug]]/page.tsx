@@ -1,5 +1,6 @@
 // 'use client'
 
+import ImageFromMovieName from '@/components/ImageFromMovieName'
 import TrailerThumbnail from '@/components/TrailerThumbnail'
 import {
   Carousel,
@@ -22,9 +23,9 @@ const driveNumber = '/0:'
 const drivePath = '/'
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const apiToHit = `${googleDriveIndexURL}${driveNumber}${drivePath}${
-    params.slug ? `${params.slug}/` : ''
-  }`
+  const slugPath = params.slug ? `${params.slug}/` : ''
+
+  const apiToHit = `${googleDriveIndexURL}${driveNumber}${drivePath}${slugPath}`
 
   const staticData = await fetch(`${apiToHit}`, {
     cache: 'force-cache',
@@ -41,6 +42,39 @@ export default async function Page({ params }: { params: { slug: string } }) {
       page_index: 0,
     }),
   }).then((e) => e.json())
+
+  async function getMovieDetailsFromWeb(movieName: string) {
+    const resp = await fetch(
+      `https://www.omdbapi.com/?apikey=727bbdc1&s=${movieName}`
+    )
+    const data = await resp.json()
+    return data.Search[0].Poster
+  }
+
+  function removeDoubleSpaces(str: string) {
+    // Use a regular expression to replace all occurrences of double spaces with a single space
+    return str.replace(/\s{2,}/g, ' ')
+  }
+
+  function cleanMovieName(movieName: string) {
+    // Regular expression pattern to match unnecessary characters
+    const pattern = /[-/()_"']/g
+    return removeDoubleSpaces(movieName.replace(pattern, ' ').trim())
+  }
+
+  function extractMovieName(filename: string) {
+    // Regular expression pattern to match movie names enclosed in parentheses (year)
+    const pattern = /\((\d{4})\)/
+    const match = filename.match(pattern)
+
+    if (match && match.index !== undefined) {
+      // Extracting the movie name before the (year) pattern
+      const movieName = filename.substring(0, match.index).trim()
+      return cleanMovieName(movieName)
+    } else {
+      return cleanMovieName(filename)
+    }
+  }
 
   return (
     <>
@@ -78,7 +112,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
           <CarouselContent className="-ml-3">
-            <CarouselItem className="pl-3 basis-[25%]">
+            <CarouselItem className="pl-3 basis-[17%]">
               {/* <TrailerThumbnail
                     title={elem.name}
                     thumbnailPath={
@@ -105,7 +139,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </CarouselItem>
             {staticData &&
               staticData?.data?.files.map((elem: any, index: any) => (
-                <CarouselItem key={index} className="pl-3 basis-[25%]">
+                <CarouselItem key={index} className="pl-3 basis-[17%]">
                   {/* <TrailerThumbnail
                     title={elem.name}
                     thumbnailPath={
@@ -115,29 +149,42 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
                   <div className="overflow-hidden group">
                     <div className="relative group-hover:border-2 group-hover:border-yellow-500 mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
-                      <Image
-                        className="w-full h-full"
-                        src={
-                          elem?.fileExtension == 'jpg'
-                            ? `${googleDriveIndexURL}${elem.link}`
-                            : 'https://image.tmdb.org/t/p/original/5weKu49pzJCt06OPpjvT80efnQj.jpg'
-                        }
-                        alt={
-                          elem?.fileExtension == 'jpg'
-                            ? `${googleDriveIndexURL}${elem.link}`
-                            : '/5weKu49pzJCt06OPpjvT80efnQj.jpg'
-                        }
-                        height={150}
-                        width={150}
-                      />
+                      {(elem?.mimeType as string).includes('video') ? (
+                        <ImageFromMovieName
+                          name={extractMovieName(elem.name)}
+                          key={elem.name}
+                        />
+                      ) : (
+                        <Image
+                          className="w-full h-full"
+                          // src={
+                          //   elem?.fileExtension == 'jpg'
+                          //     ? `${googleDriveIndexURL}${elem.link}`
+                          //     : 'https://image.tmdb.org/t/p/original/5weKu49pzJCt06OPpjvT80efnQj.jpg'
+                          // }
+                          src={
+                            elem?.fileExtension == 'jpg'
+                              ? `${googleDriveIndexURL}${elem.link}`
+                              : 'https://image.tmdb.org/t/p/original/5weKu49pzJCt06OPpjvT80efnQj.jpg'
+                          }
+                          alt={
+                            elem?.fileExtension == 'jpg'
+                              ? `${googleDriveIndexURL}${elem.link}`
+                              : '/5weKu49pzJCt06OPpjvT80efnQj.jpg'
+                          }
+                          height={150}
+                          width={150}
+                        />
+                      )}
                       <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-0 group-hover:opacity-100 w-full h-full transition-all">
                         <CirclePlayIcon className="w-10 h-10 text-white" />
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-0.5">
-                      <Link href={`/cloud/${elem.name}`}>
+                      <Link href={`/cloud/${slugPath}${elem.name}`}>
                         <p className="px-1 font-semibold text-sm truncate">
-                          {elem.name}
+                          {/* {elem.name} */}
+                          {extractMovieName(elem.name)}
                         </p>
                       </Link>
                       <span className="px-1 text-xs truncate">
