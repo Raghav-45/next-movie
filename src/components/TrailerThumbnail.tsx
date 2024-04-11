@@ -17,6 +17,13 @@ const textDate = async (givenDate: string) => {
   const month = formattedDate[1] as number
   const date = formattedDate[2] as number
 
+  function removeZero(date: number) {
+    if (date < 10) {
+      return (date as unknown as string).at(1)
+    }
+    return date
+  }
+
   // Array of month names
   const monthNames = [
     'January',
@@ -33,7 +40,7 @@ const textDate = async (givenDate: string) => {
     'December',
   ]
   // Return the formatted date string
-  return `${date} ${monthNames[month - 1]}, ${year}`
+  return `${removeZero(date)} ${monthNames[month - 1]}, ${year}`
 }
 
 const TrailerThumbnail: FC<TrailerThumbnailProps> = ({
