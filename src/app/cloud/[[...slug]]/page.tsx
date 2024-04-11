@@ -159,6 +159,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {staticData &&
             staticData?.data?.files.map((elem: any) => (
               <p
+                key={elem.id}
                 className={
                   elem.mimeType == 'application/vnd.google-apps.folder'
                     ? 'font-bold'
