@@ -734,7 +734,7 @@ export default function Home() {
           {Array.from({ length: 15 }).map((_, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
               <MoviePoster
-                title="Spiderman: No Way Home"
+                title="Spider-Man: No Way Home"
                 posterPath="/5weKu49pzJCt06OPpjvT80efnQj.jpg"
                 releaseDate="2024-01-01"
               />
@@ -747,13 +747,13 @@ export default function Home() {
         <CarouselContent className="-ml-3">
           {homeData.results.map((elem, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
-              {/* <MoviePoster
+              <MoviePoster
                 title={elem.original_title}
                 posterPath={elem.poster_path}
                 releaseDate={elem.release_date}
-              /> */}
+              />
 
-              <div className="overflow-hidden group">
+              {/* <div className="overflow-hidden group">
                 <div className="relative group-hover:border-2 group-hover:border-yellow-500 mb-1 rounded-md w-full overflow-hidden aspect-[2/3]">
                   <Image
                     className="w-full h-full"
@@ -763,7 +763,7 @@ export default function Home() {
                     width={150}
                   />
                   <div className="top-0 left-0 z-10 absolute flex justify-center items-center bg-black/25 opacity-0 group-hover:opacity-100 w-full h-full transition-all">
-                    <CirclePlayIcon className="w-12 h-12 text-white" />
+                    <CirclePlayIcon className="w-10 h-10 text-white" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-y-0.5">
@@ -774,7 +774,7 @@ export default function Home() {
                     {textDate(elem.release_date)}
                   </span>
                 </div>
-              </div>
+              </div> */}
             </CarouselItem>
           ))}
         </CarouselContent>
