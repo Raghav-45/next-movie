@@ -8,6 +8,12 @@ const nextConfig = {
         // port: '',
         pathname: '/t/p/original/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'gdrive.adi4545aditya.workers.dev',
+        // port: '',
+        // pathname: '/t/p/original/**',
+      },
     ],
   },
 };
