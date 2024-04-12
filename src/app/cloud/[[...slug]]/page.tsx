@@ -1,6 +1,7 @@
 // 'use client'
 
 import ImageFromMovieName from '@/components/ImageFromMovieName'
+import MoviePlayer from '@/components/MoviePlayer'
 import TrailerThumbnail from '@/components/TrailerThumbnail'
 import {
   Carousel,
@@ -199,6 +200,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </section>
 
       <p>{apiToHit}</p>
+
+      <MoviePlayer src={`${googleDriveIndexURL}/download.aspx?file=DewntSyzhYg09WBxRgt%2FVwrQwufiSLqQgBVp1sO6VweN78IPP7gHEg1UckpkgZQ8&expiry=zIHg1DglNoIU8PvubuYRBQ%3D%3D&mac=0d9f6c486f4447a36f3fb80f4ddc6d73349f6b961c3f78e32e48bc5110fe71f8`} />
 
       <div>
         <pre>{staticData && JSON.stringify(staticData, null, 2)}</pre>
