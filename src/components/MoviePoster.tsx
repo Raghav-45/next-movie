@@ -57,7 +57,7 @@ const MoviePoster: FC<MoviePosterProps> = ({
       </div>
       <div className="flex flex-col gap-y-0.5">
         <p className="px-1 font-semibold text-sm truncate">{title}</p>
-        <span className="px-1 text-xs truncate">{textDate(releaseDate)}</span>
+        <span className="px-1 text-xs truncate">{releaseDate}</span>
       </div>
     </div>
   )
