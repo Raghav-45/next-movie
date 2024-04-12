@@ -10,6 +10,7 @@ import {
 import Image from 'next/image'
 import { ChevronLeftIcon, ChevronRightIcon, CirclePlayIcon } from 'lucide-react'
 import TrailerThumbnail from '@/components/TrailerThumbnail'
+import HeroSectionCarousel from '@/components/HeroSectionCarousel'
 
 interface TVSeries {
   backdrop_path: string
@@ -132,14 +133,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex justify-center mt-12 px-4 rounded-lg w-full overflow-hidden">
-        <Carousel
-          opts={{
-            align: 'center',
-            skipSnaps: true,
-            slidesToScroll: 'auto',
-          }}
-          className="w-full"
-        >
+        <HeroSectionCarousel>
           <CarouselContent className="-ml-4">
             {weeklyTrending.results.map(
               (elem, index) =>
@@ -154,7 +148,7 @@ export default async function Home() {
                 )
             )}
           </CarouselContent>
-        </Carousel>
+        </HeroSectionCarousel>
       </div>
 
       <VirtualHubSection title="Upcoming Movies" description="Coming Soon">
