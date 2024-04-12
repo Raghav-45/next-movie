@@ -8,10 +8,15 @@ import {
 
 interface VirtualHubSectionProps {
   title: string
+  description?: string
   children: React.ReactNode
 }
 
-const VirtualHubSection: FC<VirtualHubSectionProps> = ({ title, children }) => {
+const VirtualHubSection: FC<VirtualHubSectionProps> = ({
+  title,
+  description,
+  children,
+}) => {
   return (
     <section className="px-4 md:px-6 py-6 w-full">
       <Carousel
@@ -25,9 +30,11 @@ const VirtualHubSection: FC<VirtualHubSectionProps> = ({ title, children }) => {
         <div className="flex justify-between items-center mb-2 px-0 min-h-5">
           <div className="flex flex-col flex-nowrap flex-initial justify-stretch items-stretch">
             <h2 className="font-bold text-2xl tracking-tight">{title}</h2>
-            <span className="inline-block text-ellipsis text-gray-500 text-sm whitespace-nowrap">
-              Movies & Shows (on cloud)
-            </span>
+            {description && (
+              <span className="inline-block text-ellipsis text-gray-500 text-sm whitespace-nowrap">
+                {description}
+              </span>
+            )}
           </div>
           <div className="flex justify-between items-center ml-auto w-20 h-auto">
             <CarouselPreviousCustom

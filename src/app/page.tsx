@@ -131,7 +131,33 @@ export default async function Home() {
 
   return (
     <>
-      <VirtualHubSection title={'Upcoming Movies'}>
+      <div className="flex justify-center mt-12 px-4 rounded-lg w-full overflow-hidden">
+        <Carousel
+          opts={{
+            align: 'center',
+            skipSnaps: true,
+            slidesToScroll: 'auto',
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {weeklyTrending.results.map(
+              (elem, index) =>
+                index !== 0 && (
+                  <CarouselItem key={index} className="pl-4 basis-full">
+                    <img
+                      className="rounded-lg aspect-[5/2] object-cover"
+                      src={`https://image.tmdb.org/t/p/original${elem.backdrop_path}`}
+                      alt="Hero Section Poster"
+                    />
+                  </CarouselItem>
+                )
+            )}
+          </CarouselContent>
+        </Carousel>
+      </div>
+
+      <VirtualHubSection title="Upcoming Movies" description="Coming Soon">
         <CarouselContent className="-ml-3">
           {upcomingMovies.results.map((elem, index) => (
             <CarouselItem key={index} className="pl-3 basis-[15%]">
@@ -145,7 +171,10 @@ export default async function Home() {
         </CarouselContent>
       </VirtualHubSection>
 
-      <VirtualHubSection title={'Weekly Trending'}>
+      <VirtualHubSection
+        title="Weekly Trending"
+        description="Movies & Shows (on cloud)"
+      >
         <CarouselContent className="-ml-3">
           {weeklyTrending.results.map(
             (elem, index) =>
