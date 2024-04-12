@@ -43,6 +43,32 @@ const textDate = async (givenDate: string) => {
   return `${removeZero(date)} ${monthNames[month - 1]}, ${year}`
 }
 
+function cleanNameTesting(name: string): string {
+  const forbiddenWords: string[] = [
+    '1080p',
+    '10bit',
+    'BluRay',
+    '60FPS',
+    'x265',
+    'HEVC',
+    'ESub',
+    'Hindi',
+    'english',
+    'DD 5.1',
+    // 'DD 5.1',
+  ]
+
+  // Remove forbidden words from the name
+  forbiddenWords.forEach((word) => {
+    name = name.replace(new RegExp(word, 'gi'), '')
+  })
+
+  // Remove extra whitespaces
+  name = name.replace(/\s+/g, ' ').trim()
+
+  return name
+}
+
 const TrailerThumbnail: FC<TrailerThumbnailProps> = ({
   thumbnailPath,
   title,
