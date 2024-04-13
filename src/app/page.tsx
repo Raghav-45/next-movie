@@ -96,7 +96,7 @@ const textDate = async (givenDate: string) => {
 }
 
 async function getTrending() {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/trending`)
+  const res = await fetch(`https://${process.env.VERCEL_URL}/api/trending`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch trending')
@@ -106,7 +106,7 @@ async function getTrending() {
 }
 
 async function getPopularMovies() {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/movie/popular`)
+  const res = await fetch(`https://${process.env.VERCEL_URL}/api/movie/popular`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch popular movies')
@@ -116,7 +116,7 @@ async function getPopularMovies() {
 }
 
 async function getUpcomingMovies() {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/movie/upcoming`)
+  const res = await fetch(`https://${process.env.VERCEL_URL}/api/movie/upcoming`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch popular movies')
