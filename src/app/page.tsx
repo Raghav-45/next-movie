@@ -132,7 +132,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex justify-center mt-12 px-4 rounded-lg w-full overflow-hidden">
+      {/* <div className="flex justify-center mt-12 px-4 rounded-lg w-full overflow-hidden">
         <HeroSectionCarousel>
           <CarouselContent className="-ml-4">
             {weeklyTrending.results.map(
@@ -194,7 +194,7 @@ export default async function Home() {
               )
           )}
         </CarouselContent>
-      </VirtualHubSection>
+      </VirtualHubSection> */}
 
       {/* <section className="px-4 md:px-6 py-6 w-full">
         <Carousel
