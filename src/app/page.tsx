@@ -126,9 +126,9 @@ async function getUpcomingMovies() {
 }
 
 export default async function Home() {
-  const weeklyTrending: MovieListResponse = await getTrending()
-  const popularMovies: TMDBResponseMovieOnly = await getPopularMovies()
-  const upcomingMovies: TMDBResponseMovieOnly = await getUpcomingMovies()
+  // const weeklyTrending: MovieListResponse = await getTrending()
+  // const popularMovies: TMDBResponseMovieOnly = await getPopularMovies()
+  // const upcomingMovies: TMDBResponseMovieOnly = await getUpcomingMovies()
 
   return (
     <>
